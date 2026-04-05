@@ -41,6 +41,11 @@ export class Product {
     gender: string
 
     //tags
+    @Column('text', {
+        array: true,
+        default: []
+    })
+    tags: string[]
     //images
 
     @BeforeInsert()
@@ -54,4 +59,12 @@ export class Product {
             .replaceAll(' ','_')
             .replaceAll("'", '');
     }
+    @BeforeUpdate()
+    checkSlugUpdate(){
+        this.slug = this.slug
+            .toLowerCase()
+            .replaceAll(' ','_')
+            .replaceAll("'", '');
+    }
+
 }
