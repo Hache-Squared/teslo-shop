@@ -5,12 +5,12 @@
 
 # Teslo API
 1. clonar proyecto
-2. ```yarn start:dev```
-3. Clonar el archivo __.env__
-4. Poner variables de entorno
-5. Levantar la base de datos
+2. Clonar el archivo __.env__
+3. Poner variables de entorno
+4. Levantar la base de datos
 ```
 docker-compose up -d
 ```
 
-
+5. ```yarn start:dev```
+6. ```http://localhost:3000/api/seed```
