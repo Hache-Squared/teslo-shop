@@ -1,16 +1,24 @@
 import { join } from 'path';
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { existsSync } from 'fs';
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { createReadStream, existsSync, ReadStream } from 'fs';
 
 
 @Injectable()
 export class FilesService {
 
-    getStaticProductImage( imageName: string ){
+    async getStaticProductImage( imageName: string ): Promise<ReadStream>{
         const path = join(__dirname, '../../static/products', imageName);
         if(!existsSync(path)){
             throw new BadRequestException(`No product found with image: ${imageName}`);
         }
-        return path;
+
+        try {
+            const file = createReadStream(path);
+            return file;
+        } catch (error) {
+            console.log(error);
+            throw new InternalServerErrorException('Error reading file')
+            
+        }
     }
 }
