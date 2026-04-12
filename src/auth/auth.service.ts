@@ -30,10 +30,10 @@ export class AuthService {
       await this.userRepository.save(user);
       
       delete user.password;
-      
+
       return {
         ...user,
-        token: this.getJwtToken({ email: user.email })
+        token: this.getJwtToken({ email: user.email, sub: user.id })
       };
     } catch (error) {
       this.handleExceptions(error)
@@ -48,7 +48,8 @@ export class AuthService {
       where:  { email },
       select: {
         email: true,
-        password:  true
+        password:  true,
+        id: true
       }
     })
 
@@ -58,9 +59,10 @@ export class AuthService {
     if(!bcrypt.compareSync(password, user.password)){
       throw new UnauthorizedException('Credentials are not valid');
     }
+    delete user.password;
     return {
       ...user,
-      token: this.getJwtToken({ email: user.email })
+      token: this.getJwtToken({ email: user.email, sub: user.id })
     };
   }
 
