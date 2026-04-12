@@ -34,6 +34,6 @@ import { JwtAuthGuard } from './guards/jwt-auth-guard.guard';
       }
     })
   ],
-  exports: [TypeOrmModule, JwtStrategy, PassportModule, JwtModule, JwtAuthGuard]
+  exports: [TypeOrmModule, JwtStrategy, PassportModule, JwtModule, JwtAuthGuard, AuthService]
 })
 export class AuthModule {}
