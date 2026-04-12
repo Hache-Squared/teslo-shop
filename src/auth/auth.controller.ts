@@ -4,7 +4,7 @@ import { CreateUserDto, LoginUserDto } from './dto'
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser, RawHeaders, RoleProtected, Auth } from './decorators';
 import { User } from './entities/user.entity';
-import { UserRoleGuard } from './guards/user-role/user-role.guard';
+import { UserRoleGuard } from './guards/user-role.guard';
 import { ValidRoles } from './interfaces';
 
 
